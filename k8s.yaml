@@ -10,13 +10,11 @@ metadata:
   name: hello-service
   namespace: helloworld
 spec:
-  selector:
-    app: hello
-  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
+  - port: 80
+    targetPort: 80
+  selector:
+    app: helloworld
 ---
 # deployment
 apiVersion: apps/v1
@@ -26,16 +24,17 @@ metadata:
   namespace: helloworld
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: hello
+      app: helloworld
   template:
     metadata:
       labels:
-        app: hello
+        app: helloworld
     spec:
       containers:
-      - name: hello
-        image: kavi106/launch-i-app:hellov1
+      - image: kavi106/launch-i-app:hellov1
+        name: helloworld
         ports:
         - containerPort: 80
