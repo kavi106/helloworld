@@ -37,5 +37,5 @@ spec:
       containers:
       - name: hello
         image: kavi106/launch-i-app:hellov1
-        ports
+        ports:
         - containerPort: 80
